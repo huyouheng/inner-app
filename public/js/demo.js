@@ -35,6 +35,7 @@ function setSkinListHeightAndScroll(isFirstTime) {
       $el.parent().find('.slimScrollBar, .slimScrollRail').remove();
     }
 
+
     $el.slimscroll({
         height: height + 'px',
         color: 'rgba(0,0,0,0.5)',
