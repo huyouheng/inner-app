@@ -1,26 +1,30 @@
 <template>
     <div class="table-responsive">
-        <div id="DataTables_Table_1_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
+        <div class="form-inline">
             <div class="dt-buttons">
-                <button>1</button>
+                <button type="button" class="btn btn-primary btn-xs waves-effect add-btn">
+                    <i class="material-icons">add</i>
+                    <span>添加</span>
+                </button>
+                <span style="display: inline-block;clear: both;" v-if="isQuery">
+                    <button type="button" class="btn btn-xs btn-default waves-effect waves-block" @click="resetQuery()">
+                        <i class="material-icons">close</i><span>重置</span>
+                    </button>
+                </span>
             </div>
 
             <table class="table table-bordered table-striped table-hover dataTable js-exportable"
                    id="DataTables_Table_1" role="grid" aria-describedby="DataTables_Table_1_info">
                 <thead>
                 <tr role="row">
-                    <th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1"
-                        aria-sort="ascending" aria-label="Name: activate to sort column descending"
-                        style="width: 145px;">Name
-                    </th>
+                    <th rowspan="1" colspan="1" style="width: 56px;">Name</th>
                     <th class="sorting" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1"
                         aria-label="Position: activate to sort column ascending" style="width: 240px;">Position
                     </th>
                     <th class="sorting" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1"
                         aria-label="Office: activate to sort column ascending" style="width: 105px;">Office
                     </th>
-                    <th class="sorting" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1"
-                        aria-label="Age: activate to sort column ascending" style="width: 47px;">Age
+                    <th rowspan="1" colspan="1" style="width: 47px;">Age
                     </th>
                     <th class="sorting" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1"
                         aria-label="Start date: activate to sort column ascending" style="width: 99px;">Start date
@@ -126,74 +130,58 @@
                 </tbody>
             </table>
 
-            <div style="display: flex;">
-                <div style="width: 300px;margin-top: 10px;">
-                    {{currentPage}}
-                </div>
-                <div style="flex: 1; margin-top: 10px;">
-
-                    <div class="pull-right">
-                        每页<select v-model="perPageCount" class="form-control input-sm" :onchange="changePerCount()">
-                        <template v-for="item in pageValues">
-                            <option :value="item.value">{{item.value}}</option>
-                        </template>
-                        </select>条
-                        <ul class="pagination pull-right" style="margin: 0px;">
-                            <li class="paginate_button previous disabled" id="DataTables_Table_0_previous"><a href="#"
-                                                                                                              aria-controls="DataTables_Table_0"
-                                                                                                              data-dt-idx="0"
-                                                                                                              tabindex="0">Previous</a>
-                            </li>
-                            <li class="paginate_button active"><a href="#" aria-controls="DataTables_Table_0"
-                                                                  data-dt-idx="1" tabindex="0">1</a></li>
-                            <li class="paginate_button "><a href="#" aria-controls="DataTables_Table_0" data-dt-idx="2"
-                                                            tabindex="0">2</a></li>
-                            <li class="paginate_button "><a href="#" aria-controls="DataTables_Table_0" data-dt-idx="3"
-                                                            tabindex="0">3</a></li>
-                            <li class="paginate_button "><a href="#" aria-controls="DataTables_Table_0" data-dt-idx="4"
-                                                            tabindex="0">4</a></li>
-                            <li class="paginate_button "><a href="#" aria-controls="DataTables_Table_0" data-dt-idx="5"
-                                                            tabindex="0">5</a></li>
-                            <li class="paginate_button "><a href="#" aria-controls="DataTables_Table_0" data-dt-idx="6"
-                                                            tabindex="0">6</a></li>
-                            <li class="paginate_button next" id="DataTables_Table_0_next"><a href="#"
-                                                                                             aria-controls="DataTables_Table_0"
-                                                                                             data-dt-idx="7"
-                                                                                             tabindex="0">Next</a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
+            <paginate :page-values="pageValues" :total="total"
+                      v-on:change-query-info="queryChange"></paginate>
         </div>
     </div>
 </template>
 
 <script>
+    import Paginate from '../Paginate';
+    import DatePicker from 'vue-datepicker-local';
     export default {
-        name: "userList",
-        data (){
+        name: "equipmentList",
+        data () {
             return {
                 pageValues: [
-                    {key: 10,value:10},
-                    {key: 20,value:20},
-                    {key: 30,value:30},
-                    {key: 50,value:50}
+                    {key: 10, value: 10},
+                    {key: 20, value: 20},
+                    {key: 30, value: 30},
+                    {key: 40, value: 40},
+                    {key: 50, value: 50}
                 ],
-                currentPage: 1,
-                perPageCount: 10
+                total: 70,
+                isQuery: false,
             }
         },
+        components: {
+            Paginate, DatePicker
+        },
         methods: {
-            changePerCount (){
-                console.log(this.perPageCount)
+            resetQuery() {
+
+            },
+
+            queryChange (e){
+                console.log(e)
             }
+
         }
     }
 </script>
 
 <style scoped>
     .dt-buttons {
+        margin-top: 5px;
         margin-left: 10px;
-        margin-bottom: 10px;
+        margin-bottom: 12px;
+    }
+
+    .dt-buttons span {
+        margin-right: 10px;
+    }
+    .add-btn {
+        margin-left: -10px;
+        margin-right: 20px;
     }
 </style>

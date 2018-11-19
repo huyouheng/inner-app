@@ -1,46 +1,45 @@
 <template>
-    <div>
-        <custom-panel page-name="员工详情" sub-name="员工详情中包含部门">
-            <ul class="nav nav-tabs tab-nav-right" role="tablist" style="margin-top: -20px;">
-                <li role="presentation" class="active">
-                    <a href="#home_only_icon_title" data-toggle="tab">
-                        <i class="material-icons">face</i>员工
-                    </a>
-                </li>
-                <li role="presentation">
-                    <a href="#profile_only_icon_title" data-toggle="tab">
-                        <i class="material-icons">assignment_ind</i>部门
-                    </a>
-                </li>
+    <custom-panel page-name="员工详情" sub-name="员工详情中包含部门">
+        <ul class="nav nav-tabs tab-nav-right" role="tablist" style="margin-top: -20px;">
+            <li id="tab-users-index" class="active waves-effect">
+                <router-link :to="{name: 'users-index'}">
+                    <i class="material-icons">face</i>员工
+                </router-link>
+            </li>
+            <li id="tab-users-buMen" class="waves-effect">
+                <router-link :to="{name: 'users-buMen'}">
+                    <i class="material-icons">assignment_ind</i>部门
+                </router-link>
+            </li>
 
-            </ul>
-            <div class="tab-content">
-                <div role="tabpanel" class="tab-pane fade in active" id="home_only_icon_title">
-                    <user-list></user-list>
-                </div>
-                <div role="tabpanel" class="tab-pane fade" id="profile_only_icon_title">
-                    <b>Profile Content</b>
-                    <p>
-                        Lorem ipsum dolor sit amet, ut duo atqui exerci dicunt, ius impedit mediocritatem an. Pri ut tation electram moderatius.
-                        Per te suavitate democritum. Duis nemore probatus ne quo, ad liber essent aliquid
-                        pro. Et eos nusquam accumsan, vide mentitum fabellas ne est, eu munere gubergren
-                        sadipscing mel.
-                    </p>
-                </div>
-
-            </div>
-        </custom-panel>
-    </div>
+        </ul>
+        <div class="tab-content">
+            <transition name="fade" mode="out-in">
+                <router-view></router-view>
+            </transition>
+        </div>
+    </custom-panel>
 </template>
 
 <script>
     import CustomPanel from '../components/CustomPanel';
-    import UserList from '../components/users/list'
+
     export default {
         name: "users",
+        data (){
+            return {
+                menuLevel: 2, //当前菜单的级别
+            }
+        },
+        mounted (){
+
+        },
+        computed :{
+
+        },
         components: {
-            CustomPanel, UserList
-        }
+            CustomPanel
+        },
     }
 </script>
 

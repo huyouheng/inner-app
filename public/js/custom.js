@@ -10,3 +10,11 @@ $('#showPersonInfoToLeft').click(function () {
     $('#rightUserInfo').hide(moveSpeed);
     $('#leftUserInfo').show(moveSpeed);
 });
+
+//Tooltip
+$('[data-toggle="tooltip"]').tooltip({
+    container: 'body'
+});
+
+//Popover
+$('[data-toggle="popover"]').popover();

@@ -29,7 +29,7 @@
 
 
     <link href="/css/all-themes.css" rel="stylesheet" />
-    <link href="/css/dataTables.bootstrap.css" rel="stylesheet" />
+    <link href="/css/iziToast.css" rel="stylesheet" />
     <style>
         .navbar-header {
             padding: 0px 0px 0px 7px;
@@ -41,7 +41,7 @@
             margin-top: 5px;
         }
         section.content{
-            margin: 65px 15px 0 240px;
+            margin: 25px 15px 0 240px;
         }
         .sidebar{
             width: 230px;
@@ -58,10 +58,13 @@
             margin-top: 0px !important;
             margin-right: -50px;
         }
+        .panel .datepicker-popup{
+            position: relative !important;
+        }
     </style>
 </head>
 
-<div class="theme-red">
+<body class="theme-red">
 <!-- Page Loader -->
 <div class="page-loader-wrapper">
     <div class="loader">
@@ -94,22 +97,7 @@
 </div>
 <!-- #END# Search Bar -->
 <div id="app">
-    <!-- Top Bar -->
-        @include('components.header')
-    <!-- #Top Bar -->
-    <section>
-        <!-- Left Sidebar -->
-        @include('components.left-aside')
-        <!-- #END# Left Sidebar -->
-        <!-- Right Sidebar -->
-        @include('components.right-aside')
-        <!-- #END# Right Sidebar -->
-    </section>
-
-    <section class="content">
-        <router-view></router-view>
-    </section>
-
+    <app></app>
 </div>
 <!-- Jquery Core Js -->
 {{--<script src="/js/jquery.min.js"></script>--}}
@@ -130,7 +118,9 @@
 
 <!-- Demo Js -->
 <script src="/js/demo.js"></script>
+<script src="/js/iziToast.min.js"></script>
 <script src="{{asset('/js/custom.js')}}"></script>
+
 </body>
 
 </html>
