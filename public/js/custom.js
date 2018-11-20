@@ -18,3 +18,11 @@ $('[data-toggle="tooltip"]').tooltip({
 
 //Popover
 $('[data-toggle="popover"]').popover();
+
+$.custrom = {};
+
+$.custrom = {
+    msg: function(type,msg){
+        iziToast[""+type]({title: '提示',position: 'topCenter',theme: 'light',message: msg});
+    },
+};

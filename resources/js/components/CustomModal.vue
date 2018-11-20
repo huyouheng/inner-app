@@ -10,7 +10,7 @@
             </div>
             <div class="panel-footer text-center" style="background: #fff;margin-bottom: -20px;">
                 <button type="button" class="btn btn-default btn-sm waves-effect clearfix" style="margin-right: 20px;" @click="closeModel()">取消</button>
-                <button type="button" class="btn btn-success btn-sm waves-effect clearfix">创建</button>
+                <button type="button" class="btn btn-success btn-sm waves-effect clearfix" @click="createBtn()">创建</button>
             </div>
         </div>
     </modal>
@@ -37,6 +37,9 @@
         methods: {
             closeModel (){
                 this.$modal.hide(this.name);
+            },
+            createBtn() {
+                this.$emit('create-btn')
             }
         }
     }

@@ -3,5 +3,5 @@
 
 Route::any('{name?}', function () {
     return view('welcome');
-})->where('name','.*?');
+})->where('name','[^api].*?');
 

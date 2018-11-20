@@ -3,18 +3,25 @@
         <!-- User Info -->
         <div class="user-info" id="leftUserInfo">
             <div class="image">
-                <img src="/images/user.png" width="48" height="48" alt="User" />
+                <img src="/images/user.png" width="48" height="48" alt="User"/>
             </div>
             <div class="info-container">
                 <div class="name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">John Doe</div>
                 <div class="email">john.doe@example.com</div>
                 <div class="btn-group user-helper-dropdown">
-                    <i class="material-icons waves-effect waves-block" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">keyboard_arrow_down</i>
+                    <i class="material-icons waves-effect waves-block" data-toggle="dropdown" aria-haspopup="true"
+                       aria-expanded="true">keyboard_arrow_down</i>
                     <ul class="dropdown-menu pull-right">
-                        <li><a href="javascript:void(0);"><i class="material-icons">person</i>个人中心</a></li>
+                        <li>
+                            <router-link :to="{name: 'profile',params: {id:1}}">
+                                <i class="material-icons">person</i>个人中心
+                            </router-link>
+                        </li>
                         <li role="seperator" class="divider"></li>
-                        <li><a href="javascript:void(0);" id="showPersonInfoToRight"><i class="material-icons">repeat</i>右侧显示</a></li>
-                        <li><a href="javascript:void(0);" class=" waves-effect waves-block"><i class="material-icons">input</i>Sign Out</a></li>
+                        <li><a href="javascript:void(0);" id="showPersonInfoToRight"><i
+                                class="material-icons">repeat</i>右侧显示</a></li>
+                        <li><a href="javascript:void(0);" class=" waves-effect waves-block"><i class="material-icons">input</i>Sign
+                            Out</a></li>
                     </ul>
                 </div>
             </div>
@@ -62,12 +69,12 @@
 <script>
     export default {
         name: "left-aside",
-        data (){
+        data() {
             return {
-                MenuLevel:1, //当前菜单的级别
+                MenuLevel: 1, //当前菜单的级别
             }
         },
-        mounted (){
+        mounted() {
             // let tab = this.$router.currentRoute.name.split('-');
             // $('#menu-'+tab[this.MenuLevel -1 ]).addClass('active');
         },
@@ -76,5 +83,8 @@
 </script>
 
 <style scoped>
-
+    .sidebar .user-info {
+        -webkit-background-size: 100%;
+        background-size: 100%;
+    }
 </style>

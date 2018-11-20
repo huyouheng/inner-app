@@ -40,14 +40,10 @@
                 </tbody>
             </table>
         </div>
-        <custom-modal name="createBuMen" :draggable="true" height="auto">
+        <custom-modal name="createBuMen" :draggable="true" height="auto" v-on:create-btn="createBumMe()">
             <div class="form-line" style="display: flex;">
                 <label class="form-label" style="display: inline-block; width: 80px;line-height: 40px;">部门名称:</label>
                 <input type="text" v-model="create.c_name" class="form-control" style="flex: 1;">
-            </div>
-            <div class="form-line" style="display: flex;">
-                <label class="form-label" style="display: inline-block; width: 80px;line-height: 40px;">负责人:</label>
-                <input type="text" v-model="create.c_leader" class="form-control" style="flex: 1;">
             </div>
             <div class="form-line" style="display: flex;">
                 <label class="form-label" style="display: inline-block; width: 80px;line-height: 40px;">创建时间:</label>
@@ -68,7 +64,6 @@
                 create: {
                     c_date: '',
                     c_name: '',
-                    c_leader: ''
                 }
             }
         },
@@ -78,6 +73,12 @@
         methods: {
             addBuMen (){
                 this.$modal.show('createBuMen');
+            },
+            createBumMe(){
+                if (this.create.c_name === ''){
+                    return iziToast.error({title: '提示',position: 'topCenter',theme: 'light',message: '名称不能为空...'});
+                }
+
             }
         }
     }

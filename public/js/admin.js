@@ -124,8 +124,13 @@ $.AdminBSB.leftSideBar = {
 
             //Scroll active menu item when page load, if option set = true
             if ($.AdminBSB.options.leftSideBar.scrollActiveItemWhenPageLoad) {
-                var activeItemOffsetTop = $('.menu .list li.active')[0].offsetTop
-                if (activeItemOffsetTop > 150) $el.slimscroll({ scrollTo: activeItemOffsetTop + 'px' });
+                try{
+                    var activeItemOffsetTop = $('.menu .list li.active')[0].offsetTop
+                    if (activeItemOffsetTop > 150) $el.slimscroll({ scrollTo: activeItemOffsetTop + 'px' });
+                }catch (e){
+                    console.log('%c 组件加载出错...','font-size: 20px;background: #eee;color:#7b9ef5;');
+                }
+
             }
         }
     },
@@ -445,6 +450,7 @@ $.AdminBSB.browser = {
 //==========================================================================================================================
 
 $(function () {
+
     $.AdminBSB.browser.activate();
     $.AdminBSB.leftSideBar.activate();
     $.AdminBSB.rightSideBar.activate();
@@ -454,5 +460,8 @@ $(function () {
     $.AdminBSB.select.activate();
     $.AdminBSB.search.activate();
 
-    setTimeout(function () { $('.page-loader-wrapper').fadeOut(); }, 50);
+    document.onreadystatechange = function(){
+        console.log('%c 页面加载完毕!','font-size: 20px;background: #eee;color:#7b9ef5;');
+        setTimeout(function () { $('.page-loader-wrapper').fadeOut(); }, 50);
+    }
 });
