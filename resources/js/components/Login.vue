@@ -65,22 +65,11 @@
                     'email': this.username,
                     'password': this.password
                 };
-                axios.post('/api/login', formData)
-                    .then(response => {
-                        JwtToken.setToken(response.data.token);
-                        this.$store.commit('changeLoginStatus');
-                        //this.$route.push({name:'profile'});
-                        console.log(response.data);
-                    })
-                    .catch(error => {
-                        if (error.response.status === 400) {
-                            $.custrom.msg('error', error.response.data.message);
-                        } else if (error.response.status === 401) {
-                            $.custrom.msg('error', error.response.data.message);
-                        } else if (error.response.status === 422) {
-                            $.custrom.msg('error', '用户名和邮箱不能为空...');
-                        }
-                    });
+
+                this.$store.dispatch('loginRequest',formData).then(response=>{
+                    //TODO
+                    this.$router.push({name:'profile'});
+                });
             }
         }
     }

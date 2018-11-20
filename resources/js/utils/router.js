@@ -17,7 +17,7 @@ import Content from './../Content';
 import Login from './../components/Login';
 
 import jwtToken from '../utils/jwt';
-import Store from '../utils/store';
+import Store from './../store/index';
 
 Vue.use(VueRouter);
 
@@ -86,7 +86,7 @@ const routes = [
         path: '/login',
         name: 'login',
         component: Login,
-        meta: {}
+        meta: {requestGuest: true}
     }
 ];
 
@@ -97,10 +97,18 @@ const router = new VueRouter({
 
 router.beforeEach((to,from,next)=>{
     if (to.meta.requireAuthorized) {
-        if (Store.state.authorized || jwtToken.getToken()){
+        if (Store.state.user.authenticated || jwtToken.getToken()){
             return next();
         } else {
             return next({name: 'login'});
+        }
+    }
+
+    if (to.meta.requestGuest) {
+        if (Store.state.user.authenticated || jwtToken.getToken()){
+            return next({name:'home'});
+        } else {
+            return next();
         }
     }
 

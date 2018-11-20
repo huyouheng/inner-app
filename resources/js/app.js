@@ -10,7 +10,18 @@ Vue.use(vmodal);
 import ToggleButton from 'vue-js-toggle-button';
 Vue.use(ToggleButton);
 
-import store from './utils/store';
+import jwtToken from './utils/jwt';
+
+axios.interceptors.request.use(function (config) {
+    if (jwtToken.getToken()){
+    	config.headers['Authorization'] = 'Bearer ' + jwtToken.getToken();
+	}
+    return config;
+  }, function (error) {
+    return Promise.reject(error);
+  });
+
+import store from './store/index';
 
 import router from './utils/router';
 

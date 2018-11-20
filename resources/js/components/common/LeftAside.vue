@@ -6,8 +6,10 @@
                 <img src="/images/user.png" width="48" height="48" alt="User"/>
             </div>
             <div class="info-container">
-                <div class="name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">John Doe</div>
-                <div class="email">john.doe@example.com</div>
+                <div class="name" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    {{user.name}}
+                </div>
+                <div class="email">{{user.email}}</div>
                 <div class="btn-group user-helper-dropdown">
                     <i class="material-icons waves-effect waves-block" data-toggle="dropdown" aria-haspopup="true"
                        aria-expanded="true">keyboard_arrow_down</i>
@@ -67,17 +69,16 @@
 </template>
 
 <script>
+    import {mapGetters} from 'vuex';
+
     export default {
         name: "left-aside",
-        data() {
-            return {
-                MenuLevel: 1, //当前菜单的级别
-            }
-        },
-        mounted() {
-            // let tab = this.$router.currentRoute.name.split('-');
-            // $('#menu-'+tab[this.MenuLevel -1 ]).addClass('active');
-        },
+       
+        computed: {
+            ...mapGetters({
+                user: 'authUser'
+            })
+        }
 
     }
 </script>

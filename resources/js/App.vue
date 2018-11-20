@@ -11,9 +11,17 @@
 
 <script>
     import NotFound from './components/common/404';
-
+    import jwtToken from './utils/jwt';
     export default {
         name: "app",
+        created(){
+            if (jwtToken.getToken()) {
+                this.$store.dispatch('setAuthUser');
+            } else {
+                this.$router.push({name: 'login'});
+            }
+
+        },
         computed: {
             invalidRoute () {
                 return !this.$route.matched || this.$route.matched.length === 0;
