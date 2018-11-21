@@ -17,8 +17,9 @@
         created(){
             if (jwtToken.getToken()) {
                 this.$store.dispatch('setAuthUser');
-            } else {
-                this.$router.push({name: 'login'});
+            } else if (jwtToken.getAuthId()){
+                // this.$router.push({name: 'login'});
+                this.$store.dispatch('refreshToken');
             }
 
         },

@@ -22,5 +22,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::group([], function(\Illuminate\Routing\Router $router){
     $router->post('/register', 'Auth\RegisterController@register');
     $router->post('/login', 'Auth\LoginController@login');
+    $router->post('/logout', 'Auth\LoginController@logout');
+    $router->post('/token/refresh', 'Auth\LoginController@refresh');
 
 });

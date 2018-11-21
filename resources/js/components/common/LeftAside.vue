@@ -22,8 +22,7 @@
                         <li role="seperator" class="divider"></li>
                         <li><a href="javascript:void(0);" id="showPersonInfoToRight"><i
                                 class="material-icons">repeat</i>右侧显示</a></li>
-                        <li><a href="javascript:void(0);" class=" waves-effect waves-block"><i class="material-icons">input</i>Sign
-                            Out</a></li>
+                        <li><a @click.prevent="logout" href="javascript:void(0);" class=" waves-effect waves-block"><i class="material-icons">input</i>退出</a></li>
                     </ul>
                 </div>
             </div>
@@ -78,6 +77,13 @@
             ...mapGetters({
                 user: 'authUser'
             })
+        },
+        methods: {
+            logout (){
+                this.$store.dispatch('logoutRequest').then(response=>{
+                    this.$router.push({name:'login'});
+                });
+            }
         }
 
     }

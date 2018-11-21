@@ -206,7 +206,7 @@
                             <li><a href="javascript:void(0);"><i class="material-icons">person</i>个人中心</a></li>
                             <li role="seperator" class="divider"></li>
                             <li><a href="javascript:void(0);" id="showPersonInfoToLeft"><i class="material-icons">repeat</i>左侧显示</a></li>
-                            <li><a href="javascript:void(0);" class=" waves-effect waves-block"><i class="material-icons">input</i>Sign Out</a></li>
+                            <li><a @click.prevent="logout" href="javascript:void(0);" class=" waves-effect waves-block"><i class="material-icons">input</i>退出</a></li>
                         </ul>
                     </li>
                     <li class="pull-right waves-effect waves-block"><a href="javascript:void(0);" class="js-right-sidebar" data-close="true"><i class="material-icons">more_vert</i></a></li>
@@ -219,7 +219,14 @@
 
 <script>
     export default {
-        name: "top-menu"
+        name: "top-menu",
+        methods: {
+            logout (){
+                this.$store.dispatch('logoutRequest').then(response=>{
+                    this.$router.push({name:'login'});
+                });
+            }
+        }
     }
 </script>
 

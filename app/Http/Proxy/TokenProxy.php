@@ -45,7 +45,37 @@ class TokenProxy
             'message' => '邮箱或密码错误...'
         ],401);
     }
+    //退出
+    public function logout()
+    {
+        //1 delete access_token
+        //2 refresh token cancel auth
+        $user = auth()->guard('api')->user();
+        $accessToken = $user->token();
 
+        app('db')->table('oauth_refresh_tokens')
+            ->where('access_token_id',$accessToken->id)
+            ->update([
+                'revoked' => true
+            ]);
+        app('cookie')->forget('refresh_token');
+        
+        $accessToken->revoke();
+
+        return response()->json([
+            'status' => true,
+            'message' => '成功退出'
+        ],204);
+    }
+
+    public function refresh()
+    {
+        $refreshToken = request()->cookie('refresh_token');
+
+        return $this->proxy('refresh_token',[
+            'refresh_token' => $refreshToken
+        ]);
+    }
     private function proxy($grantType, array $data = [])
     {
         $data = array_merge($data, [
@@ -62,6 +92,7 @@ class TokenProxy
 
         return response()->json([
             'token' => $token['access_token'],
+            'auth_id' => md5($token['refresh_token']),
             'expires_in' => $token['expires_in']
         ])->cookie('refresh_token', $token['refresh_token'], 43200, null, null, false . true);
     }
